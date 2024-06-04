@@ -11,6 +11,25 @@ Este proyecto fue desarrollado en Python utilizando las librerías **Scrapy** y 
 - **Nombre del Integrante 3**: _Milagros Videla_
 - **Nombre del Integrante 4**: _Joaquin Palacio Feijoo_
 
+
+## Historial de Cambios
+
+Todas las versiones importantes y sus cambios correspondientes se documentan en este archivo.
+
+### [Alpha] - 2024-06-03
+
+- **Realizado:**
+  - Primera reunion grupal para eleccion y definicion de temas.
+
+### [v1.0.0] - 2024-06-04
+
+- **Agregado:**
+  - Sintetizacion de ideas 
+  - Primera version del proyecto lado scraping.
+
+
+*Nota*: Los cambios anteriores son solo una selección de las actualizaciones más importantes. Para ver todos los cambios, consulta el registro de cambios completo en [Historial de Cambios](#historial-de-cambios).
+
 ## Tecnologías Utilizadas
 
 - **Python**: Lenguaje de programación principal del proyecto.
@@ -58,3 +77,7 @@ scrapy crawl scrapper -o items.json
     - `spiders/`: Carpeta contenedora de la spider ejecutante del script.
         - `spider.py`: Archivo spider encargado de ejecutar el script.
 - `pyqt_ui/`: Contiene los archivos de la interfaz gráfica de PyQt.
+
+## ¡Gracias por seguir nuestro proyecto!
+
+¡Gracias por seguir nuestro proyecto y revisar nuestro historial de cambios! Si tienes alguna pregunta o sugerencia, no dudes en comunicarte con nosotros. ¡Saludos!
