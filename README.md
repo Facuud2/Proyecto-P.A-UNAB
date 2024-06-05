@@ -23,13 +23,26 @@ Todas las versiones importantes y sus cambios correspondientes se documentan en 
 
 ### [v1.0.0] - 2024-06-04
 
-- **Agregado:**
+- **Implementado:**
   - Sintetizacion de ideas 
   - Primera version del proyecto lado scraping.
 
-### [v1.0.0] - 2024-06-05
 
-- **
+### [v1.1.0] - 2024-06-05
+- **Implementado:**
+  - Modularizacion del proyecto. 
+  - Primera version del proyecto lado scraping.
+  - Implementacion del funcionamiento basico y conexion entre archivos json resultantes del scrapper y muestra en primer pantalla primitiva UI.
+
+- **Optimizado:**
+  - Optimizacion del codigo para mejor rendimiento.
+  - Optimizacion legible del codigo
+
+- **Solucionado:**
+  - Solucionado problemas de rendimiento
+  - Problemas de funcionamiento en determinados PC
+
+ 
 
 
 *Nota*: Los cambios anteriores son solo una selección de las actualizaciones más importantes. Para ver todos los cambios, consulta el registro de cambios completo en [Historial de Cambios](#historial-de-cambios).
@@ -38,7 +51,7 @@ Todas las versiones importantes y sus cambios correspondientes se documentan en 
 
 - **Python**: Lenguaje de programación principal del proyecto.
 - **ScraPy**: Framework para la extracción de datos de sitios web.
-- **PyQt**: Conjunto de herramientas para la creación de interfaces gráficas de usuario.
+- **PyQt6**: Conjunto de herramientas para la creación de interfaces gráficas de usuario.
 
 ## Requisitos
 
@@ -46,7 +59,7 @@ Antes de ejecutar el proyecto, asegúrate de tener instaladas las siguientes dep
 
 ```sh
 pip install scrapy
-pip install pyqt5
+pip install pyqt6
 ```
 
 ## Instrucciones de Uso - Basico
@@ -81,6 +94,9 @@ scrapy crawl scrapper -o items.json
     - `spiders/`: Carpeta contenedora de la spider ejecutante del script.
         - `spider.py`: Archivo spider encargado de ejecutar el script.
 - `pyqt_ui/`: Contiene los archivos de la interfaz gráfica de PyQt.
+  - `config/`: Contiene los archivos de configuracion de las ventanas del programa
+  - `modules/`: Contiene todos los modulos funcionales del proyecto
+  - `src/`: Contiene todos los recursos graficos del proyecto
 
 ## ¡Gracias por seguir nuestro proyecto!
 
