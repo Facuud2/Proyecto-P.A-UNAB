@@ -27,6 +27,10 @@ Todas las versiones importantes y sus cambios correspondientes se documentan en 
   - Sintetizacion de ideas 
   - Primera version del proyecto lado scraping.
 
+### [v1.0.0] - 2024-06-05
+
+- **
+
 
 *Nota*: Los cambios anteriores son solo una selección de las actualizaciones más importantes. Para ver todos los cambios, consulta el registro de cambios completo en [Historial de Cambios](#historial-de-cambios).
 

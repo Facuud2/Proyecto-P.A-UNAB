@@ -27,7 +27,8 @@ class ScrapperSpider(CrawlSpider):
         ml_item['envioGratis'] = response.xpath('normalize-space(//div[@class="ui-pdp-media__body"]/p/span[@class="ui-pdp-color--GREEN ui-pdp-family--SEMIBOLD"]/text())').extract()
         ml_item['reputacionTienda'] = response.xpath('normalize-space(//div[@class="ui-review-capability__rating"]/div/p[contains(@class, "ui-review-capability__rating__average")])').extract()
 
+
         self.item_count += 1
-        if self.item_count > 200:
+        if self.item_count > 21:
             raise CloseSpider('item_exceeded')
         yield ml_item

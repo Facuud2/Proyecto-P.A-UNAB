@@ -1,77 +1,35 @@
-from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton, QMessageBox, QCheckBox, QHBoxLayout, \
-    QGridLayout, QMainWindow, QVBoxLayout
-from PyQt6.QtGui import QFont, QPixmap
+from pyqt_ui.modules.header import Header
+from pyqt_ui.modules.body import Body
+# from pyqt_ui.modules.footer import Footer
+from pyqt_ui.config.config_window import config_window
+from PyQt6.QtWidgets import QApplication, QMainWindow
+
 import sys
-
-
-class Header(QWidget):
-    def __init__(self):
-        super().__init__()
-        layout = QHBoxLayout()
-        headerFont = QFont('Poppins', 17)
-
-        company_name_label = QLabel('Una Locura TM.')
-        dumb_msg_label = QLabel('ScraPy & PyQT babe!')
-
-        company_name_label.setFont(headerFont)
-        company_name_label.setStyleSheet("margin-top: 15px; margin-left: 15px;")
-
-        pixmap = QPixmap('../pyqt_ui/src/klipartz.com.png')
-        logo = QLabel(self)
-        logo.setPixmap(pixmap)
-        logo.setAlignment(Qt.AlignmentFlag.AlignHCenter)
-        logo.setStyleSheet('margin-top:15px')
-        # logo.resize()
-
-        dumb_msg_label.setFont(headerFont)
-        dumb_msg_label.setAlignment(Qt.AlignmentFlag.AlignRight)
-        dumb_msg_label.setStyleSheet("margin-top: 15px; margin-right: 15px;")
-
-        layout.addWidget(company_name_label)
-        layout.addWidget(logo)
-        layout.addWidget(dumb_msg_label)
-
-
-        self.setLayout(layout)
-
-class Main(QWidget):
-    def __init__(self):
-        super().__init__()
-        mainFont = QFont('Playfair Display',25)
-
-
-
-
-class Footer(QWidget):
-    pass
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.config_window()
+        self.setStyleSheet("""
+                        QMainWindow {
+                            background-image: url('pyqt_ui/src/background.svg');
+                                            background-repeat: no-repeat;
+                                            background-position: center;
+                                            background-size: cover; 
+                        }
+
+                                    """)
+        config_window(self)
+
+
 
         header_layout = Header()
-        main_layout = Main()
-        footer_layout = Footer()
+        main_layout = Body()
+        # footer_layout = Footer()
 
         self.setMenuWidget(header_layout)
         self.setCentralWidget(main_layout)
-        self.statusBar().addWidget(footer_layout)
-
-    def config_window(self):
-        self.setWindowTitle('ScrapOps')
-        self.setGeometry(300,500,1024,768)
-        self.show()
-        screen_geometry = self.screen().geometry()
-        window_geometry = self.geometry()
-
-        x = (screen_geometry.width() - window_geometry.width()) // 2
-        y = (screen_geometry.height() - window_geometry.height()) // 2
-
-        self.move(x, y)
-
-
+        # self.statusBar().addWidget(footer_layout)
+        main_layout.setContentsMargins(20, 20, 20, 20)
 
 
 if __name__ == '__main__':
