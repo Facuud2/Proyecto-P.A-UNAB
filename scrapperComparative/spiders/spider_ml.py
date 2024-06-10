@@ -4,7 +4,7 @@ from ..items import ScrappercomparativeItem
 from scrapy.exceptions import CloseSpider
 
 class ScrapperSpider(CrawlSpider):
-    name = 'scrapper'
+    name = 'scrapper_ml'
     item_count = 0
     allowed_domain = ['www.mercadolibre.com.ar']
     start_urls = ['https://listado.mercadolibre.com.ar/samsung#D[A:samsung]']
