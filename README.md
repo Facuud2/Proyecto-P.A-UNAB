@@ -74,7 +74,7 @@ git clone https://github.com/tu-usuario/Proyecto-P.A-UNAB.git
 cd Proyecto-P.A-UNAB
 ```
 
-- Ejecutar el script:
+- Ejecutar el programa:
 ```sh
 python main.py
 ```
@@ -83,7 +83,7 @@ python main.py
 
 - Dentro de la carpeta del proyecto, puedes ejecutar el script del scraping individual:
 ```sh
-scrapy crawl scrapper -o items.json
+scrapy crawl spider_ml -o items.json
 ```
 
 
