@@ -83,7 +83,7 @@ python main.py
 
 - Dentro de la carpeta del proyecto, puedes ejecutar el script del scraping individual:
 ```sh
-scrapy crawl spider_ml -o items.json
+scrapy crawl scrapper_ml -o items.json
 ```
 
 
