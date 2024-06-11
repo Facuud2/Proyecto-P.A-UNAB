@@ -6,11 +6,10 @@ Este proyecto fue desarrollado en Python utilizando las librerías **Scrapy** y 
 
 ### Integrantes del Grupo
 
-- **Nombre del Integrante 1**: _Facundo David Carrizo Lucero_
-- **Nombre del Integrante 2**: _Camila Abigail Juan_
-- **Nombre del Integrante 3**: _Milagros Videla_
-- **Nombre del Integrante 4**: _Joaquin Palacio Feijoo_
-
+- **Facundo David Carrizo Lucero**
+- **Camila Abigail Juan**
+- **Milagros Videla**
+- **Joaquín Palacio Feijoo**
 
 ## Historial de Cambios
 
@@ -19,57 +18,61 @@ Todas las versiones importantes y sus cambios correspondientes se documentan en 
 ### [Alpha] - 2024-06-03
 
 - **Realizado:**
-  - Primera reunion grupal para eleccion y definicion de temas.
+  - Primera reunión grupal para elección y definición de temas.
 
 ### [v1.0.0] - 2024-06-04
 
 - **Implementado:**
-  - Sintetizacion de ideas 
-  - Primera version del proyecto lado scraping.
-
+  - Sintetización de ideas.
+  - Primera versión del proyecto, lado scraping.
 
 ### [v1.1.0] - 2024-06-05
+
 - **Implementado:**
-  - Modularizacion del proyecto. 
-  - Primera version del proyecto lado scraping.
-  - Implementacion del funcionamiento basico y conexion entre archivos json resultantes del scrapper y muestra en primer pantalla primitiva UI.
+  - Modularización del proyecto.
+  - Primera versión del proyecto, lado scraping.
+  - Implementación del funcionamiento básico y conexión entre archivos JSON resultantes del scraper, y muestra en primera pantalla primitiva UI.
 
 - **Optimizado:**
-  - Optimizacion del codigo para mejor rendimiento.
-  - Optimizacion legible del codigo
+  - Optimización del código para mejor rendimiento.
+  - Mejor legibilidad del código.
 
 - **Solucionado:**
-  - Solucionado problemas de rendimiento
-  - Problemas de funcionamiento en determinados PC
-
- 
-
+  - Problemas de rendimiento.
+  - Problemas de funcionamiento en determinados PC.
 
 *Nota*: Los cambios anteriores son solo una selección de las actualizaciones más importantes. Para ver todos los cambios, consulta el registro de cambios completo en [Historial de Cambios](#historial-de-cambios).
 
 ## Tecnologías Utilizadas
 
 - **Python**: Lenguaje de programación principal del proyecto.
-- **ScraPy**: Framework para la extracción de datos de sitios web.
+- **Scrapy**: Framework para la extracción de datos de sitios web.
 - **PyQt6**: Conjunto de herramientas para la creación de interfaces gráficas de usuario.
 
 ## Requisitos
 
-Antes de ejecutar el proyecto, asegúrate de tener instaladas las siguientes dependencias:
+Antes de ejecutar el proyecto, asegúrate de tener instaladas las dependencias necesarias para su correcto funcionamiento. Puedes instalarlas ejecutando:
+
+```sh
+pip install -r requirements.txt
+```
+
+O bien, si prefieres instalarlas manualmente:
 
 ```sh
 pip install scrapy
 pip install pyqt6
 ```
 
-## Instrucciones de Uso - Basico
+## Instrucciones de Uso - Básico
 
-- Clonar el repositorio a tu propia pc para ejecutar el script **ScraPy**:
+- Clonar el repositorio:
+
 ```sh
 git clone https://github.com/tu-usuario/Proyecto-P.A-UNAB.git
 ```
 
-- Navegar mediante CMD al directorio del proyecto _**Comparativer**_ :
+- Navegar al directorio del proyecto:
 ```sh
 cd Proyecto-P.A-UNAB
 ```
@@ -81,11 +84,15 @@ python main.py
 
 ## Instrucciones de Uso - Avanzado
 
-- Dentro de la carpeta del proyecto, puedes ejecutar el script del scraping individual:
+- Ejecutar el script de scraping individual:
+
 ```sh
-scrapy crawl scrapper_ml -o items.json
+scrapy crawl scrapper_ml -o items_ml.json
 ```
 
+```sh
+scrapy crawl scrapper_ebay -o items_ebay.json
+```
 
 ## Estructura del Proyecto
 
@@ -97,7 +104,3 @@ scrapy crawl scrapper_ml -o items.json
   - `config/`: Contiene los archivos de configuracion de las ventanas del programa
   - `modules/`: Contiene todos los modulos funcionales del proyecto
   - `src/`: Contiene todos los recursos graficos del proyecto
-
-## ¡Gracias por seguir nuestro proyecto!
-
-¡Gracias por seguir nuestro proyecto y revisar nuestro historial de cambios! Si tienes alguna pregunta o sugerencia, no dudes en comunicarte con nosotros. ¡Saludos!
