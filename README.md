@@ -72,7 +72,7 @@ pip install pyqt6
 git clone https://github.com/tu-usuario/Proyecto-P.A-UNAB.git
 ```
 
-- Navegar al directorio del proyecto:
+- Navegar al directorio del proyecto desde la terminal:
 ```sh
 cd Proyecto-P.A-UNAB
 ```
@@ -84,11 +84,13 @@ python main.py
 
 ## Instrucciones de Uso - Avanzado
 
-- Ejecutar el script de scraping individual:
+- Ejecutar el script de scraping individual de **Mercado Libre**:
 
 ```sh
 scrapy crawl scrapper_ml -o items_ml.json
 ```
+
+- Ejecutar el script de scraping individual de **eBay**:
 
 ```sh
 scrapy crawl scrapper_ebay -o items_ebay.json
@@ -104,3 +106,7 @@ scrapy crawl scrapper_ebay -o items_ebay.json
   - `config/`: Contiene los archivos de configuracion de las ventanas del programa
   - `modules/`: Contiene todos los modulos funcionales del proyecto
   - `src/`: Contiene todos los recursos graficos del proyecto
+
+## ¡Gracias por seguir nuestro proyecto!
+
+¡Gracias por seguir nuestro proyecto y revisar nuestro historial de cambios! Si tienes alguna pregunta o sugerencia, no dudes en comunicarte con nosotros. ¡Saludos!
