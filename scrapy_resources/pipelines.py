@@ -12,7 +12,13 @@ import json
 class ScrapperComparativePipeline:
 
     def open_spider(self, spider):
-        self.file = open('items.json', 'w', encoding='utf-8')
+        if spider.name == 'scrapper_ml':
+            self.file = open('items_ml.json', 'w', encoding='utf-8')
+        elif spider.name == 'scrapper_ebay':
+            self.file = open('items_ebay.json', 'w', encoding='utf-8')
+        else:
+            self.file = open('error', 'w', encoding='utf-8')
+
 
     def close_spider(self, spider):
         self.file.close()

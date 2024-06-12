@@ -1,4 +1,4 @@
-# Scrapy settings for scrapperComparative project
+# Scrapy settings for scrapy_resources project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,14 +7,14 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = "scrapperComparative"
+BOT_NAME = "scrapy_resources"
 
-SPIDER_MODULES = ["scrapperComparative.spiders"]
-NEWSPIDER_MODULE = "scrapperComparative.spiders"
+SPIDER_MODULES = ["scrapy_resources.spiders"]
+NEWSPIDER_MODULE = "scrapy_resources.spiders"
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = "scrapperComparative (+http://www.yourdomain.com)"
+#USER_AGENT = "scrapy_resources (+http://www.yourdomain.com)"
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -22,7 +22,7 @@ ROBOTSTXT_OBEY = False
 COOKIES_ENABLED = False
 # Importacion Pipelines
 ITEM_PIPELINES = {
-    'scrapperComparative.pipelines.ScrapperComparativePipeline': 300,
+    'scrapy_resources.pipelines.ScrapperComparativePipeline': 300,
 }
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
@@ -51,13 +51,13 @@ ITEM_PIPELINES = {
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    "scrapperComparative.middlewares.ScrappercomparativeSpiderMiddleware": 543,
+#    "scrapy_resources.middlewares.ScrappercomparativeSpiderMiddleware": 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    "scrapperComparative.middlewares.ScrappercomparativeDownloaderMiddleware": 543,
+#    "scrapy_resources.middlewares.ScrappercomparativeDownloaderMiddleware": 543,
 #}
 
 # Enable or disable extensions
@@ -69,7 +69,7 @@ ITEM_PIPELINES = {
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    "scrapperComparative.pipelines.ScrappercomparativePipeline": 300,
+#    "scrapy_resources.pipelines.ScrappercomparativePipeline": 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
