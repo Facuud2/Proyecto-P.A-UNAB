@@ -69,7 +69,7 @@ pip install pyqt6
 - Clonar el repositorio:
 
 ```sh
-git clone https://github.com/tu-usuario/Proyecto-P.A-UNAB.git
+git clone https://github.com/Facuud2/Proyecto-P.A-UNAB.git
 ```
 
 - Navegar al directorio del proyecto desde la terminal:
