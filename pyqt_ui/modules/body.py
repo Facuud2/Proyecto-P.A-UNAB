@@ -3,7 +3,6 @@ from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QScrollArea, QPushButton, QFrame
 import json
 
-
 class Body(QWidget):
 
     def __init__(self):
@@ -11,18 +10,16 @@ class Body(QWidget):
         self.initUI()
 
     def initUI(self):
-
         mainFont = QFont('Playfair Display', 25)
         main_layout = QHBoxLayout()
 
-        left_layout = self.create_side_layout(mainFont,'Page One', 'items_ml.json')
-        right_layout = self.create_side_layout(mainFont,'Page Two', 'items_ebay.json')
+        left_layout = self.create_side_layout(mainFont, 'Page One', 'items_ml.json')
+        right_layout = self.create_side_layout(mainFont, 'Page Two', 'items_ebay.json')
         middle_layout = self.create_middle_layout()
 
         main_layout.addLayout(left_layout)
         main_layout.addLayout(middle_layout)
         main_layout.addLayout(right_layout)
-
 
         self.setLayout(main_layout)
 
@@ -39,20 +36,23 @@ class Body(QWidget):
         container_cards_widget = QWidget()
         container_cards_layout = QVBoxLayout()
 
+        # Carga y filtra los datos
         with open(data_file, 'r') as file:
             items = json.load(file)
 
+        # Filtrar elementos y asegurar que todos los valores sean cadenas
         for item in items:
-            titulo = item['nombre']
-            precio = item['precio']
-            reputacion_producto = item['reputacionTienda']
-            envioGratis = item['envioGratis']
+            titulo = self.sanitize(item.get('nombre', 'Sin nombre'))
+            precio = self.sanitize(item.get('precio', 'Sin precio'))
+            reputacion_producto = self.sanitize(item.get('reputacionTienda', 'Sin reputación'))
+            envioGratis = self.sanitize(item.get('envioGratis', 'No disponible'))
+
             description = f'''
         Precio: {precio}
-        Calificacion de usuarios: {reputacion_producto}
-        Envio Gratis: {envioGratis}'''
+        Calificación de usuarios: {reputacion_producto}
+        Envío Gratis: {envioGratis}'''
 
-            card = self.create_card(f'{titulo}', description)
+            card = self.create_card(titulo, description)
             container_cards_layout.addWidget(card)
 
         container_cards_widget.setLayout(container_cards_layout)
@@ -120,4 +120,13 @@ class Body(QWidget):
         card_frame.setLayout(card_layout)
 
         return card_frame
+
+    def sanitize(self, value):
+        """
+        Convierte valores a cadena si son listas, asegurando que el valor
+        devuelto sea siempre una cadena.
+        """
+        if isinstance(value, list):
+            return ', '.join(value)
+        return str(value)
 
