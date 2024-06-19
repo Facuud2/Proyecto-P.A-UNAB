@@ -30,8 +30,7 @@ class Body(QWidget):
         page_number_label = QLabel(section)
         page_number_label.setFont(mainFont)
 
-        input_url_label = QLineEdit()
-        input_url_label.setStyleSheet('border:2px solid; margin-bottom:10px; border-radius: 10px;padding:9px')
+
 
         container_cards_widget = QWidget()
         container_cards_layout = QVBoxLayout()
@@ -62,8 +61,6 @@ class Body(QWidget):
         item_scroll_area.setWidget(container_cards_widget)
 
         side_layout.addWidget(page_number_label)
-        side_layout.addWidget(input_url_label,
-                              alignment=Qt.AlignmentFlag.AlignLeft if section == "Page One" else Qt.AlignmentFlag.AlignRight)
         side_layout.addWidget(item_scroll_area)
 
         return side_layout
@@ -71,6 +68,9 @@ class Body(QWidget):
     def create_middle_layout(self):
         middle_layout = QVBoxLayout()
         middle_layout.setAlignment(Qt.AlignmentFlag.AlignHCenter)
+
+        input_url_label = QLineEdit()
+        input_url_label.setStyleSheet('border:2px solid; margin-bottom:10px; border-radius: 10px;padding:9px')
 
         button_middle_btn = QPushButton('Scrap')
         button_middle_btn.setStyleSheet("""
@@ -97,6 +97,8 @@ class Body(QWidget):
                 color: #666666;
             }
         """)
+
+        middle_layout.addWidget(input_url_label)
         middle_layout.addWidget(button_middle_btn)
 
         return middle_layout
