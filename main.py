@@ -3,8 +3,12 @@ from pyqt_ui.modules.body import Body
 # from pyqt_ui.modules.footer import Footer
 from pyqt_ui.config.config_window import config_window
 from PyQt6.QtWidgets import QApplication, QMainWindow
+from PyQt6.QtCore import pyqtSignal, QObject
 
 import sys
+
+class Communicate(QObject):
+    data_scraped = pyqtSignal(dict)
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -20,10 +24,10 @@ class MainWindow(QMainWindow):
                                     """)
         config_window(self)
 
-
+        self.communicate = Communicate()
 
         header_layout = Header()
-        main_layout = Body()
+        main_layout = Body(self.communicate)
         # footer_layout = Footer()
 
         self.setMenuWidget(header_layout)

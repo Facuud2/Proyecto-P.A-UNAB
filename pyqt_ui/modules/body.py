@@ -2,11 +2,13 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QScrollArea, QPushButton, QFrame
 import json
+import subprocess
 
 class Body(QWidget):
 
-    def __init__(self):
+    def __init__(self, communicate):
         super().__init__()
+        self.communicate = communicate
         self.initUI()
 
     def initUI(self):
@@ -69,8 +71,8 @@ class Body(QWidget):
         middle_layout = QVBoxLayout()
         middle_layout.setAlignment(Qt.AlignmentFlag.AlignHCenter)
 
-        input_url_label = QLineEdit()
-        input_url_label.setStyleSheet('border:2px solid; margin-bottom:10px; border-radius: 10px;padding:9px')
+        self.input_url_label = QLineEdit()
+        self.input_url_label.setStyleSheet('border:2px solid; margin-bottom:10px; border-radius: 10px;padding:9px')
 
         button_middle_btn = QPushButton('Scrap')
         button_middle_btn.setStyleSheet("""
@@ -97,8 +99,9 @@ class Body(QWidget):
                 color: #666666;
             }
         """)
+        button_middle_btn.clicked.connect(self.scrape_data)
 
-        middle_layout.addWidget(input_url_label)
+        middle_layout.addWidget(self.input_url_label)
         middle_layout.addWidget(button_middle_btn)
 
         return middle_layout
@@ -132,3 +135,22 @@ class Body(QWidget):
             return ', '.join(value)
         return str(value)
 
+
+    def scrape_data(self):
+        search_item = self.input_url_label.text()
+
+        if search_item:
+            ml_command = f"scrapy crawl scrapper_ml -a search={search_item} -o items_ml.json"
+            ebay_command = f"scrapy crawl scrapper_ebay -a search={search_item} -o items_ebay.json"
+
+            try: 
+                subprocess.run(ml_command, shell=True, check=True)
+            except subprocess.CalledProcessError as e:
+                print(f"Error executing command: {e}")
+
+            try:
+                subprocess.run(ebay_command, shell=True, check=True)
+            except subprocess.CalledProcessError as e:
+                print(f"Error executing command: {e}")
+
+        self.communicate.data_scraped.emit({'search_item': search_item})

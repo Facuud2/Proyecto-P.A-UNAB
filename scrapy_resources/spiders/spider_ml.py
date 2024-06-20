@@ -7,7 +7,10 @@ class ScrapperSpider(CrawlSpider):
     name = 'scrapper_ml'
     item_count = 0
     allowed_domain = ['www.mercadolibre.com.ar']
-    start_urls = ['https://listado.mercadolibre.com.ar/samsung#D[A:samsung]']
+
+    def __init__(self, search=None, *args, **kwargs):
+        super(ScrapperSpider, self).__init__(*args, **kwargs)
+        self.start_urls = [f'https://listado.mercadolibre.com.ar/{search}#D[A:{search}]']
 
     rules = {
 

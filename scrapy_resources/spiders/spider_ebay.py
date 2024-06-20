@@ -7,7 +7,10 @@ class ScrapperSpiderEbay(CrawlSpider):
     name = 'scrapper_ebay'
     item_count = 0
     allowed_domain = ['www.ebay.com']
-    start_urls = ['https://www.ebay.com/sch/i.html?_from=R40&_trksid=p4432023.m570.l1313&_nkw=samsung&_sacat=0']
+
+    def __init__(self, search=None, *args, **kwargs):
+        super(ScrapperSpiderEbay, self).__init__(*args, **kwargs)
+        self.start_urls = [f'https://www.ebay.com/sch/i.html?_from=R40&_trksid=p4432023.m570.l1313&_nkw={search}&_sacat=0']
 
     rules = {
 
