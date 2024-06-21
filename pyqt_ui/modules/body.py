@@ -38,7 +38,7 @@ class Body(QWidget):
         container_cards_layout = QVBoxLayout()
 
         # Carga y filtra los datos
-        with open(data_file, 'r') as file:
+        with open(data_file, 'r', encoding='utf-8') as file:
             items = json.load(file)
 
         # Filtrar elementos y asegurar que todos los valores sean cadenas
