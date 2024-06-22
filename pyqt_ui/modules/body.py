@@ -10,29 +10,41 @@ class Body(QWidget):
         super().__init__()
         self.communicate = communicate
         self.initUI()
+        # Conectar la señal de actualización de datos
+        self.communicate.data_scraped.connect(self.update_data)
 
     def initUI(self):
-        mainFont = QFont('Playfair Display', 25)
-        main_layout = QHBoxLayout()
+        self.mainFont = QFont('Playfair Display', 25)
+        self.main_layout = QHBoxLayout()
 
-        left_layout = self.create_side_layout(mainFont, 'Page One', 'items_ml.json')
-        right_layout = self.create_side_layout(mainFont, 'Page Two', 'items_ebay.json')
-        middle_layout = self.create_middle_layout()
+        self.left_layout_widget = QWidget()
+        self.left_layout = QVBoxLayout()
+        self.left_layout_widget.setLayout(self.left_layout)
 
-        main_layout.addLayout(left_layout)
-        main_layout.addLayout(middle_layout)
-        main_layout.addLayout(right_layout)
+        self.right_layout_widget = QWidget()
+        self.right_layout = QVBoxLayout()
+        self.right_layout_widget.setLayout(self.right_layout)
 
-        self.setLayout(main_layout)
+        self.middle_layout = self.create_middle_layout()
 
-    def create_side_layout(self, mainFont, section, data_file):
-        side_layout = QVBoxLayout()
-        side_layout.setAlignment(Qt.AlignmentFlag.AlignLeft if section == 'Page One' else Qt.AlignmentFlag.AlignRight)
+        self.main_layout.addWidget(self.left_layout_widget)
+        self.main_layout.addLayout(self.middle_layout)
+        self.main_layout.addWidget(self.right_layout_widget)
+
+        self.setLayout(self.main_layout)
+
+        # Cargar datos iniciales
+        self.load_data()
+
+    def load_data(self):
+        self.load_side_layout(self.left_layout, 'Mercado Libre', 'items_ml.json')
+        self.load_side_layout(self.right_layout, 'eBay', 'items_ebay.json')
+
+    def load_side_layout(self, layout, section, data_file):
+        layout.setAlignment(Qt.AlignmentFlag.AlignLeft if section == 'Page One' else Qt.AlignmentFlag.AlignRight)
 
         page_number_label = QLabel(section)
-        page_number_label.setFont(mainFont)
-
-
+        page_number_label.setFont(self.mainFont)
 
         container_cards_widget = QWidget()
         container_cards_layout = QVBoxLayout()
@@ -62,10 +74,11 @@ class Body(QWidget):
         item_scroll_area.setWidgetResizable(True)
         item_scroll_area.setWidget(container_cards_widget)
 
-        side_layout.addWidget(page_number_label)
-        side_layout.addWidget(item_scroll_area)
-
-        return side_layout
+        # Limpiar y actualizar layout
+        for i in reversed(range(layout.count())):
+            layout.itemAt(i).widget().deleteLater()
+        layout.addWidget(page_number_label)
+        layout.addWidget(item_scroll_area)
 
     def create_middle_layout(self):
         middle_layout = QVBoxLayout()
@@ -135,7 +148,6 @@ class Body(QWidget):
             return ', '.join(value)
         return str(value)
 
-
     def scrape_data(self):
         search_item = self.input_url_label.text()
 
@@ -143,7 +155,7 @@ class Body(QWidget):
             ml_command = f"scrapy crawl scrapper_ml -a search={search_item} -o items_ml.json"
             ebay_command = f"scrapy crawl scrapper_ebay -a search={search_item} -o items_ebay.json"
 
-            try: 
+            try:
                 subprocess.run(ml_command, shell=True, check=True)
             except subprocess.CalledProcessError as e:
                 print(f"Error executing command: {e}")
@@ -154,3 +166,6 @@ class Body(QWidget):
                 print(f"Error executing command: {e}")
 
         self.communicate.data_scraped.emit({'search_item': search_item})
+
+    def update_data(self):
+        self.load_data()

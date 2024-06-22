@@ -35,8 +35,11 @@ class MainWindow(QMainWindow):
         # self.statusBar().addWidget(footer_layout)
         main_layout.setContentsMargins(20, 20, 20, 20)
 
+        # Conectar la señal
+        self.communicate.data_scraped.connect(main_layout.update_data)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = MainWindow()
+    window.show()  # No olvides mostrar la ventana
     sys.exit(app.exec())
