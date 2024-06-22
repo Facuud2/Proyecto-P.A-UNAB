@@ -2,6 +2,7 @@ from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 from ..items import ScrappercomparativeItem
 from scrapy.exceptions import CloseSpider
+from urllib.parse import quote_plus
 
 class ScrapperSpider(CrawlSpider):
     name = 'scrapper_ml'
@@ -10,7 +11,8 @@ class ScrapperSpider(CrawlSpider):
 
     def __init__(self, search=None, *args, **kwargs):
         super(ScrapperSpider, self).__init__(*args, **kwargs)
-        self.start_urls = [f'https://listado.mercadolibre.com.ar/{search}#D[A:{search}]']
+        search_encoded = quote_plus(search)
+        self.start_urls = [f'https://listado.mercadolibre.com.ar/{search_encoded}#D[A:{search_encoded}]']
 
     rules = {
 

@@ -2,6 +2,7 @@ from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 from scrapy.exceptions import CloseSpider
 from ..items import ScrappercomparativeItem
+from urllib.parse import quote_plus
 
 class ScrapperSpiderEbay(CrawlSpider):
     name = 'scrapper_ebay'
@@ -10,7 +11,8 @@ class ScrapperSpiderEbay(CrawlSpider):
 
     def __init__(self, search=None, *args, **kwargs):
         super(ScrapperSpiderEbay, self).__init__(*args, **kwargs)
-        self.start_urls = [f'https://www.ebay.com/sch/i.html?_from=R40&_trksid=p4432023.m570.l1313&_nkw={search}&_sacat=0']
+        search_encoded = quote_plus(search)
+        self.start_urls = [f'https://www.ebay.com/sch/i.html?_from=R40&_trksid=p4432023.m570.l1313&_nkw={search_encoded}&_sacat=0']
 
     rules = {
 

@@ -3,6 +3,7 @@ from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QScrollArea, QPushButton, QFrame
 import json
 import subprocess
+from urllib.parse import quote_plus
 
 class Body(QWidget):
 
@@ -152,8 +153,9 @@ class Body(QWidget):
         search_item = self.input_url_label.text()
 
         if search_item:
-            ml_command = f"scrapy crawl scrapper_ml -a search={search_item} -o items_ml.json"
-            ebay_command = f"scrapy crawl scrapper_ebay -a search={search_item} -o items_ebay.json"
+            search_item_encoded = quote_plus(search_item)
+            ml_command = f"scrapy crawl scrapper_ml -a search={search_item_encoded} -o items_ml.json"
+            ebay_command = f"scrapy crawl scrapper_ebay -a search={search_item_encoded} -o items_ebay.json"
 
             try:
                 subprocess.run(ml_command, shell=True, check=True)
