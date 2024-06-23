@@ -2,8 +2,9 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QScrollArea, QPushButton, QFrame
 import json
-import subprocess
 from urllib.parse import quote_plus
+from pyqt_ui.modules.scraper_thread import ScraperThread
+from pyqt_ui.modules.loading_dialog import LoadingDialog
 
 class Body(QWidget):
     """
@@ -83,20 +84,31 @@ class Body(QWidget):
         with open(data_file, 'r', encoding='utf-8') as file:
             items = json.load(file)
 
+        # Verificar que si no hay elementos disponibles mostrar un mensaje
+        if not items:
+            no_data_label = QLabel("No hay datos disponibles. Busca el producto que desees.")
+            no_data_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            no_data_label.setWordWrap(True)
+            no_data_label.setMargin(10)
+            no_data_label.setIndent(10)
+            no_data_label.setFont(QFont('Calibri', 16))
+            container_cards_layout.addWidget(no_data_label)
+
+        else:
         # Filtrar elementos y asegurar que todos los valores sean cadenas
-        for item in items:
-            titulo = self.sanitize(item.get('nombre', 'Sin nombre'))
-            precio = self.sanitize(item.get('precio', 'Sin precio'))
-            reputacion_producto = self.sanitize(item.get('reputacionTienda', 'Sin reputación'))
-            envioGratis = self.sanitize(item.get('envioGratis', 'No disponible'))
-
-            description = f'''
-        Precio: {precio}
-        Calificación de usuarios: {reputacion_producto}
-        Envío Gratis: {envioGratis}'''
-
-            card = self.create_card(titulo, description)
-            container_cards_layout.addWidget(card)
+            for item in items:
+                titulo = self.sanitize(item.get('nombre', 'Sin nombre'))
+                precio = self.sanitize(item.get('precio', 'Sin precio'))
+                reputacion_producto = self.sanitize(item.get('reputacionTienda', 'Sin reputación'))
+                envioGratis = self.sanitize(item.get('envioGratis', 'No disponible'))
+                description = f'''
+        
+            Precio: {precio}
+            Calificación de usuarios: {reputacion_producto}
+            Envío Gratis: {envioGratis}'''
+    
+                card = self.create_card(titulo, description)
+                container_cards_layout.addWidget(card)
 
         container_cards_widget.setLayout(container_cards_layout)
 
@@ -207,23 +219,18 @@ class Body(QWidget):
         """
 
         search_item = self.input_url_label.text()
-
         if search_item:
             search_item_encoded = quote_plus(search_item)
-            ml_command = f"scrapy crawl scrapper_ml -a search={search_item_encoded} -o items_ml.json"
-            ebay_command = f"scrapy crawl scrapper_ebay -a search={search_item_encoded} -o items_ebay.json"
+            self.loading_dialog = LoadingDialog()
+            self.loading_dialog.show()
 
-            try:
-                subprocess.run(ml_command, shell=True, check=True)
-            except subprocess.CalledProcessError as e:
-                print(f"Error executing command: {e}")
+            self.scraper_thread = ScraperThread(search_item_encoded)
+            self.scraper_thread.scraping_finished.connect(self.on_scraping_finished)
+            self.scraper_thread.start()
 
-            try:
-                subprocess.run(ebay_command, shell=True, check=True)
-            except subprocess.CalledProcessError as e:
-                print(f"Error executing command: {e}")
-
-        self.communicate.data_scraped.emit({'search_item': search_item})
+    def on_scraping_finished(self):
+        self.loading_dialog.close()
+        self.communicate.data_scraped.emit({'search_item': self.input_url_label.text()})
 
     def update_data(self):
         self.load_data()
