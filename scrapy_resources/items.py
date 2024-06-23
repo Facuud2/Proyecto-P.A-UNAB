@@ -1,15 +1,17 @@
-# Define here the models for your scraped items
-#
-# See documentation in:
-# https://docs.scrapy.org/en/latest/topics/items.html
-
 import scrapy
 
-
 class ScrappercomparativeItem(scrapy.Item):
-    # define the fields for your item here like:
-    nombre = scrapy.Field()
-    precio = scrapy.Field()
-    envioGratis = scrapy.Field()
-    reputacionTienda = scrapy.Field()
+    """
+    El modelo para los items scrapeados.
 
+    Atributos:
+        nombre (str): Nombre del item.
+        precio (str): Precio del item.
+        envioGratis (str): Si el item es enviado gratis.
+        reputacionTienda (str): La reputación de la tienda.
+    """
+
+    nombre = scrapy.Field()  # Nombre del item.
+    precio = scrapy.Field()  # Precio del item.
+    envioGratis = scrapy.Field()  # Si el item es enviado gratis.
+    reputacionTienda = scrapy.Field()  # La reputación de la tienda.

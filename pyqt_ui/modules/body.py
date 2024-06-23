@@ -6,8 +6,20 @@ import subprocess
 from urllib.parse import quote_plus
 
 class Body(QWidget):
+    """
+    Una clase QWidget para crear el diseño principal de la aplicación de scraping.
+    Incluye secciones para mostrar datos de diferentes fuentes y una sección central
+    para la entrada del usuario y la iniciación del scraping.
+    """
 
     def __init__(self, communicate):
+        """
+        Inicializa el widget Body.
+
+        Args:
+            communicate: Una instancia para señales de comunicación.
+        """
+
         super().__init__()
         self.communicate = communicate
         self.initUI()
@@ -15,6 +27,11 @@ class Body(QWidget):
         self.communicate.data_scraped.connect(self.update_data)
 
     def initUI(self):
+        """
+        Configura la interfaz de usuario principal creando y organizando
+        los diseños laterales y centrales.
+        """
+
         self.mainFont = QFont('Playfair Display', 25)
         self.main_layout = QHBoxLayout()
 
@@ -42,6 +59,18 @@ class Body(QWidget):
         self.load_side_layout(self.right_layout, 'eBay', 'items_ebay.json')
 
     def load_side_layout(self, layout, section, data_file):
+        """
+        Crea un diseño lateral para mostrar los datos extraídos.
+
+        Args:
+            mainFont (QFont): La fuente a usar para la etiqueta de la sección.
+            section (str): El nombre de la sección.
+            data_file (str): El archivo JSON que contiene los datos a mostrar.
+
+        Returns:
+            QVBoxLayout: El diseño lateral creado.
+        """
+
         layout.setAlignment(Qt.AlignmentFlag.AlignLeft if section == 'Page One' else Qt.AlignmentFlag.AlignRight)
 
         page_number_label = QLabel(section)
@@ -82,6 +111,13 @@ class Body(QWidget):
         layout.addWidget(item_scroll_area)
 
     def create_middle_layout(self):
+        """
+        Crea el diseño central para la entrada del usuario y el botón de scraping.
+
+        Returns:
+            QVBoxLayout: El diseño central creado.
+        """
+
         middle_layout = QVBoxLayout()
         middle_layout.setAlignment(Qt.AlignmentFlag.AlignHCenter)
 
@@ -121,6 +157,17 @@ class Body(QWidget):
         return middle_layout
 
     def create_card(self, item_name, item_content):
+        """
+        Crea una tarjeta para mostrar información del artículo.
+
+        Args:
+            item_name (str): El nombre del artículo.
+            item_content (str): El contenido descriptivo del artículo.
+
+        Returns:
+            QFrame: La tarjeta creada.
+        """
+
         card_frame = QFrame()
         card_frame.setFrameShape(QFrame.Shape.Box)
         card_frame.setLineWidth(2)
@@ -144,12 +191,21 @@ class Body(QWidget):
         """
         Convierte valores a cadena si son listas, asegurando que el valor
         devuelto sea siempre una cadena.
+        Args:
+            value: El valor a convertir.
+
+        Returns:
+            str: El valor convertido a cadena.
         """
         if isinstance(value, list):
             return ', '.join(value)
         return str(value)
 
     def scrape_data(self):
+        """
+        Inicia el proceso de scraping basado en el término de búsqueda ingresado por el usuario.
+        """
+
         search_item = self.input_url_label.text()
 
         if search_item:
