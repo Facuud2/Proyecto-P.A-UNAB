@@ -1,6 +1,6 @@
 from pyqt_ui.modules.header import Header
 from pyqt_ui.modules.body import Body
-# from pyqt_ui.modules.footer import Footer
+from pyqt_ui.modules.footer import Footer
 from pyqt_ui.config.config_window import config_window
 from PyQt6.QtWidgets import QApplication, QMainWindow
 from PyQt6.QtCore import pyqtSignal, QObject
@@ -42,10 +42,12 @@ class MainWindow(QMainWindow):
         # Crea los layouts de header y body
         header_layout = Header()
         main_layout = Body(self.communicate)
+        footer_layout = Footer(self)
 
         # Establece los layouts en la ventana
         self.setMenuWidget(header_layout)
         self.setCentralWidget(main_layout)
+        self.setStatusBar(footer_layout.get_status_bar())
         main_layout.setContentsMargins(20, 20, 20, 20)
 
         # Conecta la señal de data_scraped al metodo update_data
